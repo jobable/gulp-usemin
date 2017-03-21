@@ -238,6 +238,58 @@ This will generate the following output:
     <script src="js/optimized.js"></script>
 ```
 
+
+## Options
+-  `assetsBasePath`: assets base url
+Usage:
+    ```javascript
+    gulp.task('usemin', function() {
+      gulp.src('./*.html')
+        .pipe(usemin({
+          assetsBasePath: 'ASSETS/BASEPATH',
+          js: [minifier({ minify: true, minifyJS: true })]
+        }))
+        .pipe(gulp.dest('build/'));
+    });
+    ```
+    
+    ```html
+    <!-- build:js app.js -->
+    <link rel="stylesheet" href="js/script1.js">
+    <link rel="stylesheet" href="js/script1.js">
+    <!-- endbuild -->
+    ```
+    
+    Output:
+    ```html
+     <link rel="stylesheet" href="ASSETS/BASEPATH/js/app.js">
+    ```
+    
+- `md5ParamKey`: add md5 url params (mostly for url versioning)
+Usage:
+    ```javascript
+    gulp.task('usemin', function() {
+      gulp.src('./*.html')
+        .pipe(usemin({
+          md5ParamKey: 'v',
+          js: [minifier({ minify: true, minifyJS: true })]
+        }))
+        .pipe(gulp.dest('build/'));
+    });
+    ```
+        
+    ```html
+    <!-- build:js app.js -->
+    <link rel="stylesheet" href="js/script1.js">
+    <link rel="stylesheet" href="js/script1.js">
+    <!-- endbuild -->
+    ```
+    
+    Output:
+    ```html
+     <link rel="stylesheet" href="js/app.js?v=FIRST_SEVEN_LETTERS_OF_MD5">
+    ```
+
 ## Changelog
 
 #####0.3.28
